@@ -1,3 +1,3 @@
 # dotfiles
-install package `package` with `stow package -t $HOME`
+install package `package` with `stow package`
 
