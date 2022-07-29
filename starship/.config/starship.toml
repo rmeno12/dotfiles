@@ -1,0 +1,16 @@
+format = "$all$time$line_break$jobs$battery$status$shell$character"
+
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[\\$](bold red)"
+
+[hostname]
+ssh_only = false
+
+[time]
+disabled = false
+style = "bold #9c9c9c"
+
+[username]
+show_always = true
+format = "[$user]($style) on "
