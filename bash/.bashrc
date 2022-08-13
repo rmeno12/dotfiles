@@ -9,7 +9,7 @@
 HISTCONTROL=ignoreboth # don't add duplicates or lines starting with spaces
 shopt -s histappend    # append to history file, not overwrite
 HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=10000
 
 # Adjust windowsize variables after each command if needed
 shopt -s checkwinsize
@@ -40,6 +40,7 @@ fi
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
 export PATH=$PATH:~/.local/bin
+
 eval "$(starship init bash)"
 eval "$(fnm env --use-on-cd)"
 
