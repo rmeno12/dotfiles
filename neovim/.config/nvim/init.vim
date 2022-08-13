@@ -8,12 +8,14 @@ endif
 
 "" Plugin declarations
 call plug#begin(data_dir)
-"coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'tomasr/molokai'
 
 "vim sig?
 "vimspector?
+
+Plug 'voldikss/vim-floaterm'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -42,6 +44,7 @@ set mouse=nvi
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set signcolumn=yes
+set updatetime=250
 
 set expandtab
 set shiftwidth=4
@@ -76,13 +79,22 @@ nnoremap <silent> L :tablast<CR>
 nnoremap <silent> J :tabprev<CR>
 nnoremap <silent> K :tabnext<CR>
 
-" vim-airline
+"" vim-floaterm
+noremap <silent> <C-t> :FloatermToggle<CR>
+tnoremap <silent> <C-t> <C-\><C-n>:FloatermToggle<CR>
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
+
+"" vim-airline
 let g:airline_theme = 'molokai'
 let g:airline_powerline_fonts = 1
 
 "" vim-commentary
 noremap <silent> <C-_> :Commentary<CR>
 inoremap <silent> <C-_> <C-o>:Commentary<CR>
+
+"" vim-gitgutter
+hi GitGutterAdd ctermfg=2
 
 "" nerdtree
 nnoremap <silent> <leader>e :NERDTreeToggle<CR>
