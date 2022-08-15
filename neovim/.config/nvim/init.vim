@@ -21,7 +21,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -65,6 +64,9 @@ hi Normal ctermbg=NONE
 hi LineNr ctermbg=NONE
 hi SignCOlumn ctermbg=NONE
 
+""" open at the last cursor position
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
 
 " BINDINGS & PLUGIN-SPECIFIC SETTINGS
 let g:which_key_map = {}
@@ -84,6 +86,7 @@ nnoremap <silent> J :tabprev<CR>
 nnoremap <silent> K :tabnext<CR>
 
 "" coc
+""" checks if we're on the first character or right after whitespace
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -93,7 +96,9 @@ inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+""" use enter to complete if necessary (kinda annoying, TODO: find a better way)
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 """ show documentation in preview window with K
 nnoremap <silent> K :call ShowDocumentation()<CR>
 function! ShowDocumentation()
@@ -120,7 +125,6 @@ nmap <leader>gp <Plug>(coc-diagnostics-prev)
 let g:which_key_map.g.p = 'Previous'
 nmap <leader>n <Plug>(coc-rename)
 let g:which_key_map.n = 'Rename'
-
 
 "" vim-floaterm
 noremap <silent> <C-t> :FloatermToggle<CR>
