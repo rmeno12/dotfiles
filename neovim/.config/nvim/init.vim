@@ -31,6 +31,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
+Plug 'liuchengxu/vim-which-key'
+
 call plug#end()
 
 
@@ -65,6 +67,8 @@ hi SignCOlumn ctermbg=NONE
 
 
 " BINDINGS & PLUGIN-SPECIFIC SETTINGS
+let g:which_key_map = {}
+
 "" bind space as leader
 nnoremap <SPACE> <Nop>
 let mapleader = " "
@@ -101,13 +105,21 @@ function! ShowDocumentation()
 endfunction
 """ go to relevant places
 nmap <silent> <leader>d <Plug>(coc-definition)
+let g:which_key_map.d = 'Definition'
 nmap <silent> <leader>y <Plug>(coc-type-definition)
+let g:which_key_map.y = 'Type Definition'
 nmap <silent> <leader>i <Plug>(coc-implementation)
+let g:which_key_map.i = 'Implementation'
 nmap <silent> <leader>r <Plug>(coc-references)
+let g:which_key_map.r = 'References'
 """ other commands
 nmap <leader>gn <Plug>(coc-diagnostics-next)
+let g:which_key_map.g = { 'name': '+diagnostics' }
+let g:which_key_map.g.n = 'Next'
 nmap <leader>gp <Plug>(coc-diagnostics-prev)
+let g:which_key_map.g.p = 'Previous'
 nmap <leader>n <Plug>(coc-rename)
+let g:which_key_map.n = 'Rename'
 
 
 "" vim-floaterm
@@ -129,11 +141,18 @@ hi GitGutterAdd ctermfg=2
 
 "" nerdtree
 nnoremap <silent> <leader>e :NERDTreeToggle<CR>
+let g:which_key_map.e = 'Toggle explorer'
 """ close vim if nerdtree is only window in only tab
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 """ close tab if nerdtree is only window in it
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 """ use same nerdtree on each tab
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
-let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
+"" vim-which-key
+set timeoutlen=500
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+call which_key#register('<Space>', "g:which_key_map")
 
