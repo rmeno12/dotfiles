@@ -32,6 +32,8 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'liuchengxu/vim-which-key'
 
+Plug 'mhinz/vim-startify'
+
 call plug#end()
 
 
