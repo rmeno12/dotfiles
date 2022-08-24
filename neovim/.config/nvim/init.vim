@@ -9,6 +9,7 @@ endif
 "" Plugin declarations
 call plug#begin(data_dir)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'tomasr/molokai'
 
@@ -82,10 +83,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <silent> H :tabfirst<CR>
-nnoremap <silent> L :tablast<CR>
-nnoremap <silent> J :tabprev<CR>
-nnoremap <silent> K :tabnext<CR>
+nnoremap <silent> H :tabprev<CR>
+nnoremap <silent> L :tabnext<CR>
 
 "" coc
 """ checks if we're on the first character or right after whitespace
@@ -127,6 +126,8 @@ nmap <leader>gp <Plug>(coc-diagnostics-prev)
 let g:which_key_map.g.p = 'Previous'
 nmap <leader>n <Plug>(coc-rename)
 let g:which_key_map.n = 'Rename'
+""" fix highlighting with coc-clangd
+let g:coc_default_semantic_highlight_groups = 1
 
 "" vim-floaterm
 noremap <silent> <C-t> :FloatermToggle<CR>
