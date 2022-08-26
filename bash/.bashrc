@@ -32,6 +32,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias ip='ip --color=auto'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
