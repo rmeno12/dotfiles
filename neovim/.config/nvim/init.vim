@@ -11,7 +11,7 @@ call plug#begin(data_dir)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-Plug 'tomasr/molokai'
+Plug 'rmeno12/vim-code-dark'
 
 "vim sig?
 "vimspector?
@@ -61,11 +61,7 @@ set smartcase
 set autoindent
 set smartindent
 
-colorscheme molokai
-""" set the bg to be terminal default
-hi Normal ctermbg=NONE
-hi LineNr ctermbg=NONE
-hi SignCOlumn ctermbg=NONE
+colorscheme codedark
 
 """ open at the last cursor position
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -126,6 +122,8 @@ nmap <leader>gp <Plug>(coc-diagnostics-prev)
 let g:which_key_map.g.p = 'Previous'
 nmap <leader>n <Plug>(coc-rename)
 let g:which_key_map.n = 'Rename'
+nnoremap <leader>f :call CocAction('format')<CR>
+let g:which_key_map.f = 'Format'
 """ fix highlighting with coc-clangd
 let g:coc_default_semantic_highlight_groups = 1
 
@@ -140,11 +138,8 @@ let g:airline_theme = 'molokai'
 let g:airline_powerline_fonts = 1
 
 "" vim-commentary
-noremap <silent> <C-_> :Commentary<CR>
-inoremap <silent> <C-_> <C-o>:Commentary<CR>
-
-"" vim-gitgutter
-hi GitGutterAdd ctermfg=2
+noremap <silent> <C-/> :Commentary<CR>
+inoremap <silent> <C-/> <C-o>:Commentary<CR>
 
 "" nerdtree
 nnoremap <silent> <leader>e :NERDTreeToggle<CR>
