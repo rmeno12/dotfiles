@@ -134,7 +134,7 @@ let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
 
 "" vim-airline
-let g:airline_theme = 'molokai'
+let g:airline_theme = 'codedark'
 let g:airline_powerline_fonts = 1
 
 "" vim-commentary
