@@ -49,6 +49,7 @@ set backspace=indent,eol,start
 set clipboard=unnamedplus
 set signcolumn=yes
 set updatetime=250
+set noshowmode
 
 set expandtab
 set shiftwidth=4
