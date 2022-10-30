@@ -21,7 +21,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-sleuth'
 
 Plug 'tpope/vim-fugitive'
@@ -138,10 +138,6 @@ let g:floaterm_height = 0.9
 "" vim-airline
 let g:airline_theme = 'codedark'
 let g:airline_powerline_fonts = 1
-
-"" vim-commentary
-noremap <silent> <C-/> :Commentary<CR>
-inoremap <silent> <C-/> <C-o>:Commentary<CR>
 
 "" nerdtree
 nnoremap <silent> <leader>e :NERDTreeToggle<CR>
