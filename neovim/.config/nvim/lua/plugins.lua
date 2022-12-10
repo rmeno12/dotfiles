@@ -36,6 +36,7 @@ function M.setup()
     -- LSP config
     use {
       'neovim/nvim-lspconfig',
+      event = 'BufReadPre',
       requires = {
         -- Automatically install LSPs to stdpath for neovim
         'williamboman/mason.nvim',
@@ -44,18 +45,60 @@ function M.setup()
         -- Useful status updates for LSP
         'j-hui/fidget.nvim',
       },
+      config = function()
+        require('mason').setup()
+        require('config.lsp').setup()
+      end,
     }
 
     -- autocomplete
+    -- use {
+    --   'ms-jpq/coq_nvim',
+    --   branch = 'coq',
+    --   event = 'InsertEnter',
+    --   opt = true,
+    --   run = ':COQdeps',
+    --   config = function()
+    --     require('config.coq').setup()
+    --   end,
+    --   requires = {
+    --     { "ms-jpq/coq.artifacts", branch = "artifacts" },
+    --     { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
+    --   },
+    --   disable = false,
+    -- }
+    use {
+      'L3MON4D3/LuaSnip',
+      wants = 'friendly-snippets',
+      config = function()
+        require('config.luasnip').setup()
+      end,
+    }
     use {
       'hrsh7th/nvim-cmp',
-      requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+      event = 'InsertEnter',
+      opt = true,
+      config = function()
+        require('config.cmp').setup()
+      end,
+      requires = {
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-nvim-lua',
+        'ray-x/cmp-treesitter',
+        'hrsh7th/cmp-nvim-lsp',
+        'saadparwaiz1/cmp_luasnip',
+        'L3MON4D3/LuaSnip',
+        'rafamadriz/friendly-snippets',
+      },
+      disable = false,
     }
 
     use { -- Highlight, edit, and navigate code
       'nvim-treesitter/nvim-treesitter',
-      run = function()
-        pcall(require('nvim-treesitter.install').update { with_sync = true })
+      run = ':TSUpdate',
+      config = function()
+        require('config.treesitter').setup()
       end,
     }
 
@@ -66,8 +109,34 @@ function M.setup()
       'lewis6991/gitsigns.nvim',
       event = 'BufReadPre',
       requires = { 'nvim-lua/plenary.nvim' },
-      config = function() 
+      config = function()
         require('config.gitsigns').setup()
+      end,
+    }
+
+    -- file explorer/tree
+    use {
+      'nvim-neo-tree/neo-tree.nvim',
+      branch = 'v2.x',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'kyazdani43/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
+      },
+      cmd = { 'Neotree' },
+      config = function ()
+        require('config.neo-tree').setup()
+      end
+    }
+
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani43/nvim-web-devicons',
+      },
+      cmd = { 'NvimTreeToggle', 'NvimTreeClose' },
+      config = function()
+        require('config.nvimtree').setup()
       end,
     }
 
@@ -97,9 +166,17 @@ function M.setup()
     use 'tpope/vim-sleuth' -- automatically detect tab width
     use { -- key mapping help
       'folke/which-key.nvim',
-      even = 'VimEnter',
       config = function()
         require('config.which-key').setup()
+      end,
+    }
+
+    -- decay colorscheme
+    use {
+      'decaycs/decay.nvim',
+      as = 'decay',
+      config = function()
+        require('config.decay-color').setup()
       end,
     }
 

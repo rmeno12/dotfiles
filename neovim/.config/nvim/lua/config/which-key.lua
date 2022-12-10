@@ -20,9 +20,7 @@ function M.setup()
   }
 
   local mappings = {
-    ['w'] = { '<cmd>update!<CR>', 'Save' },
-    ['q'] = { '<cmd>q<CR>', 'Quit' },
-
+    ['e'] = { '<cmd>Neotree toggle<cr>', 'Explorer' },
     z = {
       name = 'Packer',
       c = { '<cmd>PackerCompile<cr>', 'Compile' },
