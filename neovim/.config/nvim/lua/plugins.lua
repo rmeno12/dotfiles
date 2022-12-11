@@ -52,21 +52,6 @@ function M.setup()
     }
 
     -- autocomplete
-    -- use {
-    --   'ms-jpq/coq_nvim',
-    --   branch = 'coq',
-    --   event = 'InsertEnter',
-    --   opt = true,
-    --   run = ':COQdeps',
-    --   config = function()
-    --     require('config.coq').setup()
-    --   end,
-    --   requires = {
-    --     { "ms-jpq/coq.artifacts", branch = "artifacts" },
-    --     { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
-    --   },
-    --   disable = false,
-    -- }
     use {
       'L3MON4D3/LuaSnip',
       wants = 'friendly-snippets',
@@ -120,24 +105,13 @@ function M.setup()
       branch = 'v2.x',
       requires = {
         'nvim-lua/plenary.nvim',
-        'kyazdani43/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
         'MunifTanjim/nui.nvim',
       },
       cmd = { 'Neotree' },
       config = function ()
         require('config.neo-tree').setup()
       end
-    }
-
-    use {
-      'kyazdani42/nvim-tree.lua',
-      requires = {
-        'kyazdani43/nvim-web-devicons',
-      },
-      cmd = { 'NvimTreeToggle', 'NvimTreeClose' },
-      config = function()
-        require('config.nvimtree').setup()
-      end,
     }
 
     -- misc
@@ -170,13 +144,26 @@ function M.setup()
         require('config.which-key').setup()
       end,
     }
+    use {
+      'voldikss/vim-floaterm',
+      cmd = {'FloatermNew', 'FloatermToggle'},
+      config = function()
+        require('config.floaterm').setup()
+      end,
+    }
 
     -- decay colorscheme
+    -- use {
+    --   'decaycs/decay.nvim',
+    --   as = 'decay',
+    --   config = function()
+    --     require('config.color.decay').setup()
+    --   end,
+    -- }
     use {
-      'decaycs/decay.nvim',
-      as = 'decay',
+      'marko-cerovac/material.nvim',
       config = function()
-        require('config.decay-color').setup()
+        require('config.color.material').setup()
       end,
     }
 

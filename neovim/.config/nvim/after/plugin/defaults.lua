@@ -13,6 +13,9 @@ vim.opt.smartcase = true -- don't ignore case if there are capital letters
 vim.opt.updatetime = 50 -- update time 50ms
 vim.opt.signcolumn = "yes" -- always show sign column
 vim.opt.timeoutlen = 300 -- timeoutlen to 300ms (for which-key)
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Highlight on yank
 vim.cmd [[
