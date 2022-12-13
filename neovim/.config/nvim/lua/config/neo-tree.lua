@@ -9,10 +9,17 @@ function M.setup()
     window = {
       width = 30,
     },
-    filesystems = {
+    filesystem = {
       filtered_items = {
         visible = true,
       }
+    },
+    default_component_configs = {
+      git_status = {
+        symbols = {
+          unstaged = "!",
+        }
+      },
     },
   }
 end
