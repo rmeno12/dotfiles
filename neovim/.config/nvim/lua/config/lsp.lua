@@ -7,7 +7,7 @@ local function on_attach(client, bufnr)
   local keymap = vim.keymap.set
 
   keymap('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation', buffer = bufnr })
-  keymap('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Documentation', buffer = bufnr })
+  -- keymap('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Documentation', buffer = bufnr })
 
   local keymap_l = {
     l = {
