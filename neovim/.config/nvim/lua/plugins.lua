@@ -175,6 +175,12 @@ function M.setup()
         require('config.floaterm').setup()
       end,
     }
+    use {
+      'ggandor/leap.nvim',
+      config = function()
+        require('config.leap').setup()
+      end,
+    }
 
     -- decay colorscheme
     -- use {
