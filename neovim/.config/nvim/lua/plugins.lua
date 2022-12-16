@@ -78,6 +78,12 @@ function M.setup()
       },
       disable = false,
     }
+    use {
+      'windwp/nvim-autopairs',
+      config = function()
+        require('config.nvim-autopairs').setup()
+      end,
+    }
 
     use { -- Highlight, edit, and navigate code
       'nvim-treesitter/nvim-treesitter',
