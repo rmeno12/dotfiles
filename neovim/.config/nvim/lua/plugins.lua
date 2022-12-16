@@ -87,6 +87,24 @@ function M.setup()
       end,
     }
 
+    -- telescope: finding things
+    use {
+      'nvim-telescope/telescope.nvim',
+      branch = '0.1.x',
+      cmd = { 'Telescope' },
+      requires = {
+        'nvim-lua/plenary.nvim',
+        {
+          'nvim-telescope/telescope-fzf-native.nvim',
+          run = 'make',
+          cond = vim.fn.executable 'make' == 1
+        },
+      },
+      config = function()
+        require('config.telescope').setup()
+      end,
+    }
+
     -- git related plugins
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
@@ -109,7 +127,7 @@ function M.setup()
         'MunifTanjim/nui.nvim',
       },
       cmd = { 'Neotree' },
-      config = function ()
+      config = function()
         require('config.neo-tree').setup()
       end
     }
@@ -146,7 +164,7 @@ function M.setup()
     }
     use {
       'voldikss/vim-floaterm',
-      cmd = {'FloatermNew', 'FloatermToggle'},
+      cmd = { 'FloatermNew', 'FloatermToggle' },
       config = function()
         require('config.floaterm').setup()
       end,
