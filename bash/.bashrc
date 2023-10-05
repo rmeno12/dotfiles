@@ -46,5 +46,5 @@ if [ -e /usr/share/fzf/completion.bash ]; then . /usr/share/fzf/completion.bash;
 export PATH=$PATH:~/.local/bin
 
 eval "$(starship init bash)"
-eval "$(fnm env --use-on-cd)"
+# eval "$(fnm env --use-on-cd)"
 
