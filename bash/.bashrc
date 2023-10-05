@@ -40,6 +40,9 @@ fi
 
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
+if [ -e /usr/share/fzf/key-bindings.bash ]; then . /usr/share/fzf/key-bindings.bash; fi
+if [ -e /usr/share/fzf/completion.bash ]; then . /usr/share/fzf/completion.bash; fi
+
 export PATH=$PATH:~/.local/bin
 
 eval "$(starship init bash)"
