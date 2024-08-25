@@ -20,11 +20,10 @@ shopt -s globstar
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\]\$ '
 
 case "$TERM" in
-    xterm*|rxvt*)
-        PS1="\[\e]0;\u@\h:\w\a\]$PS1"
-        ;;
-    *)
-        ;;
+xterm* | rxvt*)
+	PS1="\[\e]0;\u@\h:\w\a\]$PS1"
+	;;
+*) ;;
 esac
 
 # Set stuff to have colors
@@ -35,10 +34,10 @@ alias egrep='egrep --color=auto'
 alias ip='ip --color=auto'
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+	. ~/.bash_aliases
 fi
 
-[ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 if [ -e /usr/share/fzf/key-bindings.bash ]; then . /usr/share/fzf/key-bindings.bash; fi
 if [ -e /usr/share/fzf/completion.bash ]; then . /usr/share/fzf/completion.bash; fi
@@ -46,5 +45,3 @@ if [ -e /usr/share/fzf/completion.bash ]; then . /usr/share/fzf/completion.bash;
 export PATH=$PATH:~/.local/bin
 
 eval "$(starship init bash)"
-# eval "$(fnm env --use-on-cd)"
-
