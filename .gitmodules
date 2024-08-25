@@ -1,0 +1,3 @@
+[submodule "lazyvim/.config/nvim"]
+	path = lazyvim/.config/nvim
+	url = git@github.com:rmeno12/lazyvim.git
