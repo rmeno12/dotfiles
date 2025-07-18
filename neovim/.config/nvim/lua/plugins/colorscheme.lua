@@ -12,9 +12,7 @@ return {
             },
         },
         integrations = {
-            blink_cmp = {
-                style = "bordered",
-            },
+            blink_cmp = true,
             gitsigns = true,
             mini = true,
             native_lsp = {

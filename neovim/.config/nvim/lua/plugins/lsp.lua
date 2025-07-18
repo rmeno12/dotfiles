@@ -19,8 +19,15 @@ return {
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 200,
+                    window = {
+                        border = "rounded",
+                    },
                 },
                 -- list = { selection = { preselect = false } },
+                menu = {
+                    border = "rounded",
+                    winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
+                },
             },
             signature = { enabled = true },
         },
