@@ -53,7 +53,7 @@ return {
                         },
                     },
                 },
-                rust_analyzer = { enabled = true }
+                rust_analyzer = { enabled = true },
             },
         },
         config = function(_, opts)
@@ -83,11 +83,12 @@ return {
         "stevearc/conform.nvim",
         lazy = true,
         cmd = "ConformInfo",
+        event = { "BufWritePre" },
         keys = {
             {
                 "<leader>cf",
                 function()
-                    require("conform").format({ async = true, timeout_ms = 500 })
+                    require("conform").format({ async = true })
                 end,
                 mode = { "n", "v" },
                 desc = "Format buffer",
@@ -104,7 +105,13 @@ return {
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
-                rust = { "rustfmt"}
+                rust = { "rustfmt" },
+                javascript = { "prettier" },
+                javascriptreact = { "prettier" },
+                -- javascript.jsx = { "prettier" },
+                typescript = { "prettier" },
+                typescriptreact = { "prettier" },
+                -- typescript.tsx = { "prettier" },
             },
         },
     },
