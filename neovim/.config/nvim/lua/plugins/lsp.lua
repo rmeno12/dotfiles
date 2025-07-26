@@ -37,6 +37,8 @@ return {
         dependencies = { "saghen/blink.cmp" },
         opts = {
             servers = {
+                cmake = {},
+                clangd = {},
                 lua_ls = {
                     settings = {
                         Lua = {
@@ -60,7 +62,14 @@ return {
                         },
                     },
                 },
-                rust_analyzer = { enabled = true },
+                rust_analyzer = {
+                    enabled = true,
+                    settings = {
+                        check = {
+                            command = "clippy",
+                        },
+                    },
+                },
             },
         },
         config = function(_, opts)
@@ -111,6 +120,10 @@ return {
         },
         opts = {
             formatters_by_ft = {
+                cmake = { "cmake_format" },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
+                cuda = { "clang-format" },
                 lua = { "stylua" },
                 rust = { "rustfmt" },
                 javascript = { "prettier" },
