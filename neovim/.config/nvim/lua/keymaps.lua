@@ -17,5 +17,12 @@ k.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev error" })
 k.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next warning" })
 k.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev warning" })
 
-k.set("n", "<leader>-", "<C-w>s", {desc = "Split below"})
-k.set("n", "<leader>|", "<C-w>v", {desc = "Split right"})
+k.set("n", "<leader>-", "<C-w>s", { desc = "Split below" })
+k.set("n", "<leader>|", "<C-w>v", { desc = "Split right" })
+
+k.set({ "i", "n", "s" }, "<esc>", function()
+    vim.cmd("noh")
+    return "<esc>"
+end, { expr = true })
+
+k.set("n", "<leader>l", ":Lazy<cr>", { desc = "Open Lazy menu" })
