@@ -4,7 +4,7 @@ return {
         {
             "<leader><space>",
             function()
-                Snacks.picker.smart()
+                Snacks.picker.files({ hidden = true, exclude = { ".git/*", ".jj/*" } })
             end,
             desc = "Smart Find Files",
         },
