@@ -87,11 +87,11 @@ return {
                 lspconfig[server].setup(config)
             end
 
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
-            vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-            vim.keymap.set("n", "gY", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+            vim.keymap.set("n", "gd", Snacks.picker.lsp_definitions, { desc = "Go to definition" })
+            vim.keymap.set("n", "gD", Snacks.picker.lsp_declarations, { desc = "Go to declaration" })
+            vim.keymap.set("n", "gr", Snacks.picker.lsp_references, { desc = "Go to references", nowait = true })
+            vim.keymap.set("n", "gI", Snacks.picker.lsp_implementations, { desc = "Go to implementation" })
+            vim.keymap.set("n", "gY", Snacks.picker.lsp_type_definitions, { desc = "Go to type definition" })
             vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
         end,
     },
