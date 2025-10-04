@@ -35,43 +35,16 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = { "saghen/blink.cmp" },
-        opts = {
-            servers = {
-                cmake = {},
-                clangd = {},
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            -- Make the server aware of Neovim runtime files
-                            runtime = {
-                                version = "LuaJIT",
-                            },
-                            -- Neovim's Lua docs are labelled with "vim"
-                            diagnostics = {
-                                globals = { "vim" },
-                            },
-                            workspace = {
-                                -- Make the server aware of other files in your config directory
-                                library = vim.api.nvim_get_runtime_file("", true),
-                                checkThirdParty = false, -- Avoids warnings for 3rd-party libs
-                            },
-                            -- Do not send telemetry data for privacy
-                            telemetry = {
-                                enable = false,
-                            },
-                        },
-                    },
-                },
-                rust_analyzer = {
-                    enabled = true,
-                    settings = {
-                        check = {
-                            command = "clippy",
-                        },
-                    },
-                },
-            },
-        },
+        opts = function()
+            -- Load server configurations from individual files
+            local servers = {
+                cmake = require("lsp.cmake"),
+                clangd = require("lsp.clangd"),
+                lua_ls = require("lsp.lua_ls"),
+                rust_analyzer = require("lsp.rust_analyzer"),
+            }
+            return { servers = servers }
+        end,
         config = function(_, opts)
             -- Setup base capabilities
             local base_capabilities = {
