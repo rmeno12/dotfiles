@@ -73,8 +73,8 @@ return {
             },
         },
         config = function(_, opts)
-            local lspconfig = require("lspconfig")
-            local capabilities = {
+            -- Setup base capabilities
+            local base_capabilities = {
                 workspace = {
                     fileOperations = {
                         didRename = true,
@@ -82,9 +82,26 @@ return {
                     },
                 },
             }
+
+            -- Configure each LSP server using vim.lsp.config (nvim-lspconfig 2.0+)
             for server, config in pairs(opts.servers) do
-                config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-                lspconfig[server].setup(config)
+                -- Merge base capabilities with blink.cmp capabilities
+                local capabilities = vim.tbl_deep_extend(
+                    "force",
+                    base_capabilities,
+                    require("blink.cmp").get_lsp_capabilities(config.capabilities or {})
+                )
+                
+                -- Prepare final server configuration
+                local server_config = vim.tbl_deep_extend("force", {
+                    capabilities = capabilities,
+                }, config)
+                
+                -- Use vim.lsp.config to configure the server
+                vim.lsp.config[server] = server_config
+                
+                -- Enable the LSP server using vim.lsp.enable
+                vim.lsp.enable(server)
             end
 
             vim.keymap.set("n", "gd", Snacks.picker.lsp_definitions, { desc = "Go to definition" })
