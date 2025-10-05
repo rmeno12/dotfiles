@@ -31,7 +31,8 @@ vim.opt.smartindent = true
 
 vim.opt.termguicolors = true
 
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 vim.opt.winborder = "rounded"
