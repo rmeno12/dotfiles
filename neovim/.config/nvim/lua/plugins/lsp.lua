@@ -35,64 +35,35 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = { "saghen/blink.cmp" },
-        opts = {
-            servers = {
-                cmake = {},
-                clangd = {},
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            -- Make the server aware of Neovim runtime files
-                            runtime = {
-                                version = "LuaJIT",
-                            },
-                            -- Neovim's Lua docs are labelled with "vim"
-                            diagnostics = {
-                                globals = { "vim" },
-                            },
-                            workspace = {
-                                -- Make the server aware of other files in your config directory
-                                library = vim.api.nvim_get_runtime_file("", true),
-                                checkThirdParty = false, -- Avoids warnings for 3rd-party libs
-                            },
-                            -- Do not send telemetry data for privacy
-                            telemetry = {
-                                enable = false,
-                            },
-                        },
-                    },
-                },
-                rust_analyzer = {
-                    enabled = true,
-                    settings = {
-                        check = {
-                            command = "clippy",
-                        },
-                    },
-                },
-            },
-        },
         config = function(_, opts)
-            local lspconfig = require("lspconfig")
-            local capabilities = {
-                workspace = {
-                    fileOperations = {
-                        didRename = true,
-                        willRename = true,
-                    },
-                },
-            }
-            for server, config in pairs(opts.servers) do
-                config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-                lspconfig[server].setup(config)
-            end
+            local lsps = { "cmake", "clangd", "lua_ls", "pyright", "rust_analyzer" }
+            vim.lsp.enable(lsps)
 
-            vim.keymap.set("n", "gd", Snacks.picker.lsp_definitions, { desc = "Go to definition" })
-            vim.keymap.set("n", "gD", Snacks.picker.lsp_declarations, { desc = "Go to declaration" })
-            vim.keymap.set("n", "gr", Snacks.picker.lsp_references, { desc = "Go to references", nowait = true })
-            vim.keymap.set("n", "gI", Snacks.picker.lsp_implementations, { desc = "Go to implementation" })
-            vim.keymap.set("n", "gY", Snacks.picker.lsp_type_definitions, { desc = "Go to type definition" })
-            vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    vim.keymap.set("n", "gd", Snacks.picker.lsp_definitions, { desc = "Go to definition" })
+                    vim.keymap.set("n", "gD", Snacks.picker.lsp_declarations, { desc = "Go to declaration" })
+                    vim.keymap.set(
+                        "n",
+                        "gr",
+                        Snacks.picker.lsp_references,
+                        { desc = "Go to references", nowait = true }
+                    )
+                    vim.keymap.set("n", "gI", Snacks.picker.lsp_implementations, { desc = "Go to implementation" })
+                    vim.keymap.set("n", "gY", Snacks.picker.lsp_type_definitions, { desc = "Go to type definition" })
+                    vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+                    vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
+                    vim.keymap.set("n", "<Leader>ch", vim.lsp.buf.document_highlight, { desc = "Highlight" })
+
+                    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+                    if client:supports_method("textDocument/foldingRange") then
+                        local win = vim.api.nvim_get_current_win()
+                        vim.wo[win][0].foldmethod = "expr"
+                        vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+                    end
+                end,
+            })
         end,
     },
     {
@@ -125,6 +96,7 @@ return {
                 cpp = { "clang-format" },
                 cuda = { "clang-format" },
                 lua = { "stylua" },
+                python = {"ruff_organize_imports", "ruff_format"},
                 rust = { "rustfmt" },
                 javascript = { "prettier" },
                 javascriptreact = { "prettier" },
