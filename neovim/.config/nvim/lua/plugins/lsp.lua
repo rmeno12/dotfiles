@@ -36,7 +36,7 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = { "saghen/blink.cmp" },
         config = function(_, opts)
-            local lsps = { "cmake", "clangd", "lua_ls", "pyright", "rust_analyzer" }
+            local lsps = { "cmake", "clangd", "lua_ls", "ruff", "basedpyright", "rust_analyzer" }
             vim.lsp.enable(lsps)
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -96,7 +96,7 @@ return {
                 cpp = { "clang-format" },
                 cuda = { "clang-format" },
                 lua = { "stylua" },
-                python = {"ruff_organize_imports", "ruff_format"},
+                python = { "ruff_organize_imports", "ruff_format" },
                 rust = { "rustfmt" },
                 javascript = { "prettier" },
                 javascriptreact = { "prettier" },
